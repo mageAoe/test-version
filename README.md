@@ -47,6 +47,12 @@ version 字段结构为：'0.0.0-0'
 比如，package.json 包中的 version 是 1.1.1，然后执行如下命令：
 
 ```js
+npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]
+
+alias: verison
+```
+
+```js
 npm version prerelease -m "这里你可以添加此次更新版本号的描述"
 ```
 
