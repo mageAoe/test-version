@@ -77,3 +77,30 @@ npm run changelog
 生成 CHANGELOG.md 文件
 
 参考文章： https://juejin.cn/post/6844903888072654856#heading-5
+
+### 配置 changelog-option.js
+
+> 可以配置也可以不配置，看自己需求
+
+changelog-option.js 文件，观察这个文件后，发现正是这个文件定义了哪些 git commit 要写入更新日志，以及生成日志的每块内容的标题。
+
+例如，如果我只关注 feat(新功能) 、fix(Bug 修复) 、perf(性能优化)、revert(回退)，那么我就可以在配置中这样写。
+
+```js
+module.exports = {
+  writerOpts: {
+    transform: (commit, context) => {
+      if (commit.type === "feat") {
+        commit.type = "✨ Features | 新功能";
+      } else if (commit.type === "fix") {
+        commit.type = "🐛 Bug Fixes | Bug 修复";
+      } else if (commit.type === "perf") {
+        commit.type = "⚡ Performance Improvements | 性能优化";
+      } else if (commit.type === "revert" || commit.revert) {
+        commit.type = "⏪ Reverts | 回退";
+      }
+      return;
+    },
+  },
+};
+```
